@@ -4,7 +4,7 @@
 
 思路：使用暴力循环数组，利用 Map 缓存当前项的值与索引，并计算数组项与目标值 target 的差值，如果在循环过程中发现缓存中存在差值匹配，则返回。
 
-```js
+```javascript
 const twoSum = (nums, target) => {
   const map = new Map()
   for (let i = 0; i < nums.length; i++) {
