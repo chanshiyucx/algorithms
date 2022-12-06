@@ -1,0 +1,34 @@
+# [Rotate Array](https://leetcode.cn/problems)
+
+题述：轮转数组，给你一个数组，将数组中的元素向右轮转 k 个位置，其中 k 是非负数。
+
+思路一：先将 k 按数组长度取余，因为如果 k 大于数组长度，轮转多圈后还是会恢复原始排序，只需轮转余数次数即可。
+
+复杂度分析：
+时间复杂度：O(n)。
+空间复杂度：O(1)。
+
+```javascript
+const rotate = (nums, k) => {
+  k = k % nums.length
+  while (k > 0) {
+    nums.unshift(nums.pop())
+    k--
+  }
+  return nums
+}
+```
+
+思路二：依然先将 k 按数组长度取余，但是通过截取数组尾部并将其拼接在数组头部的方式实现轮转。
+
+复杂度分析：
+时间复杂度：O(1)。
+空间复杂度：O(1)。
+
+```javascript
+const rotate = (nums, k) => {
+  k = k % nums.length
+  nums.unshift(...nums.splice(nums.length - k, k))
+  return nums
+}
+```

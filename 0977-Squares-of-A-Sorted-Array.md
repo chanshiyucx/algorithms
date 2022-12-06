@@ -1,0 +1,29 @@
+# [Squares of A Sorted Array](https://leetcode.cn/problems/squares-of-a-sorted-array)
+
+题述：有序数组的平方，给你一个按**非递减顺序**排序的整数数组 nums，返回每个数字的平方组成的新数组，要求也按非递减顺序排序。
+
+思路：数组已按升序排序，但可能存在负数，我们可以使用两个指针分别指向下标位置 0 和 n−1，每次比较两个指针对应的数的平方，选择较大的那个放入答案并移动指针。
+
+复杂度分析：
+时间复杂度：O(n)，其中 n 是数组的长度。
+空间复杂度：O(1)，除了存储答案的数组以外，只需要维护常量空间。
+
+```javascript
+const sortedSquares = (nums) => {
+  const ret = []
+  let left = 0,
+    right = nums.length - 1
+  while (left <= right) {
+    const leftVal = Math.pow(nums[left], 2)
+    const rightVal = Math.pow(nums[right], 2)
+    if (leftVal <= rightVal) {
+      ret.unshift(rightVal)
+      right--
+    } else {
+      ret.unshift(leftVal)
+      left++
+    }
+  }
+  return ret
+}
+```
