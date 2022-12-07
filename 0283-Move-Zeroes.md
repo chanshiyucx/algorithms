@@ -1,0 +1,23 @@
+# [Move Zeroes](https://leetcode.cn/problems/move-zeroes)
+
+题述：移动零，给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+
+思路：假设第一个值为 0 的下标为 0，遍历数组，如果值不为零，则交换前面标记的 0，同时值为零的下标加一。
+
+复杂度分析：  
+时间复杂度：O(n)，其中 n 是数组的长度。  
+空间复杂度：O(1)。
+
+```javascript
+const moveZeroes = (nums) => {
+  let inx = 0
+  for (let i = 0; i < nums.length; i++) {
+    // 如果不为零则交换位置
+    if (nums[i] !== 0) {
+      ;[nums[inx], nums[i]] = [nums[i], nums[inx]]
+      inx++
+    }
+  }
+  return nums
+}
+```

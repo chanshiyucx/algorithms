@@ -1,0 +1,25 @@
+# [Longest Common Prefix](https://leetcode.cn/problems/longest-common-prefix/)
+
+题述：最长公共前缀，编写一个函数来查找字符串数组中的最长公共前缀。如果不存在公共前缀，返回空字符串 ""。
+
+思路：取第一个字符串为初始遍历条件，遍历所有字符串的字符，找出最长的公共前缀。
+
+复杂度分析：  
+时间复杂度：O(mn)，其中 m 是字符串数组中的字符串的平均长度，n 是字符串的数量。最坏情况下，字符串数组中的每个字符串的每个字符都会被比较一次。  
+空间复杂度：O(1)。
+
+```javascript
+const longestCommonPrefix = (strs) => {
+  let ret = ""
+  const arr = strs[0]
+  for (let i = 0; i < arr.length; i++) {
+    if (strs.every((e) => e[i] === arr[i])) {
+      ret += arr[i]
+      continue
+    } else {
+      break
+    }
+  }
+  return ret
+}
+```
