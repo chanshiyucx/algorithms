@@ -46,3 +46,39 @@ const twoSum = (numbers, target) => {
   }
 }
 ```
+
+思路三：使用双指针，左右指针分别指向第一个元素和最后一个元素，计算左右指针的元素之和：
+
+- 如果和大于目标值，则右指针减一
+- 如果和小于目标值，则左指针加一
+- 如果和等于目标值，则为我们需要求的解
+
+思索指针移动过程中是否可能错过唯一解？
+
+假设 `numbers[i]+numbers[j]=target` 是唯一解，其中 `0≤i<j≤numbers.length−1`。初始时两个指针分别指向下标 0 和下标 numbers.length−1，左指针指向的下标小于或等于 i，右指针指向的下标大于或等于 j。一定是左指针先到达下标 i 的位置或者右指针先到达下标 j 的位置。
+
+- 如果左指针先到达下标 i 的位置，此时右指针还在下标 j 的右侧，sum>target，因此一定是右指针左移，左指针不可能移到 i 的右侧。
+- 如果右指针先到达下标 j 的位置，此时左指针还在下标 i 的左侧，sum<target，因此一定是左指针右移，右指针不可能移到 j 的左侧。
+
+由此可见，在整个移动过程中，左指针不可能移到 i 的右侧，右指针不可能移到 j 的左侧，因此不会错过唯一解。
+
+复杂度分析：  
+时间复杂度：O(n)，其中 n 是数组的长度，两个指针移动的总次数最多为 n 次。
+空间复杂度：O(1)。
+
+```javascript
+const twoSum = (numbers, target) => {
+  let left = 0,
+    right = numbers.length - 1
+  while (left < right) {
+    const sum = numbers[left] + numbers[right]
+    if (sum > target) {
+      right--
+    } else if (sum < target) {
+      left++
+    } else {
+      return [left + 1, right + 1]
+    }
+  }
+}
+```
